@@ -20,6 +20,7 @@ public class SimpleGraphicsOperation {
 
     public static void main(String args[]) {
 
+    	// Original File on which we are performing operation
     	String originalFilePath = "K:\\testfiles\\images\\happybirthday.jpg";
     	
         // Lets Resize Image to 200x200 Resolution for the use as a thumbnail
@@ -46,7 +47,7 @@ public class SimpleGraphicsOperation {
         	ex.printStackTrace();
         }
         
-        // Let Resize Image to 150x150 px and in PNG format	
+        // Let perform multiple operation on the file	
         String targetFilePath3 = "K:\\testfiles\\images\\happybirthday_edited.jpg";
         try {
         	FileInputStream fis = new FileInputStream(originalFilePath);
@@ -59,7 +60,7 @@ public class SimpleGraphicsOperation {
         	ex.printStackTrace();
         }
 
-        // Let Resize Image to 150x150 px and in PNG format	
+        // Let append file horizontaly to each other	
         String targetFilePath4 = "K:\\testfiles\\images\\combine_images.jpg";
         try {
         	FileInputStream fis1 = new FileInputStream("K:\\testfiles\\images\\testimg1.jpg");
@@ -79,7 +80,8 @@ public class SimpleGraphicsOperation {
     }
 
     public SimpleGraphicsOperation() {
-       // ProcessStarter.setGlobalSearchPath();
+    	// You Need to set path in below line you dont want to add the graphics magick on PATH Environment Variable of linux or Windows
+    	// ProcessStarter.setGlobalSearchPath("path graphics magick installation");
     }
 
     public void resizeImage(
@@ -87,13 +89,15 @@ public class SimpleGraphicsOperation {
     		String targetFile, 
     		int width, 
     		int height) throws InterruptedException, IOException, IM4JavaException {
-        ConvertCmd command = new ConvertCmd(true);
+        
+    	ConvertCmd command = new ConvertCmd(true);
         IMOperation operation = new IMOperation();
 
         operation.addImage(originalFile);
         operation.resize(width, height);
         operation.addImage(targetFile);
 
+        // Execute the Operation
         command.run(operation);
     }
     
@@ -105,6 +109,7 @@ public class SimpleGraphicsOperation {
     		String format) throws IOException, InterruptedException, IM4JavaException {
     	
     	ConvertCmd command = new ConvertCmd(true);
+    	
     	Pipe pipeIn = new Pipe(input, null); 
     	Pipe pipeOut = new Pipe(null, output);
     	
@@ -133,7 +138,6 @@ public class SimpleGraphicsOperation {
     	operation.addImage("-");
     	operation.blur(100.0);
     	operation.border(15,15);
-    	operation.bordercolor("#ff0000");
     	operation.addImage("-");
     	
     	command.run(operation);
