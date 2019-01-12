@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+dependencies {
+    compile group: 'org.im4java', name: 'im4java', version: '1.4.0'
+    testImplementation 'junit:junit:4.12'
+}
+
+mainClassName='org.javahotfix.gm.app.SimpleGraphicsOperation'
+
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
+repositories {
+    jcenter()
+}
+
